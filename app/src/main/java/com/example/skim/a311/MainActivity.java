@@ -1,14 +1,20 @@
 package com.example.skim.a311;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
@@ -80,5 +86,26 @@ public class MainActivity extends AppCompatActivity implements Map.OnFragmentInt
 	}
 	public void onFragmentInteraction(Uri uri) {
 		//you can leave it empty
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.action_settings:
+
+                /*
+                Intent in = new Intent(this,Settings.class);
+                startActivity(in);
+                return true;
+                */
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.actionbutton, menu);
+		return true;
 	}
 }
