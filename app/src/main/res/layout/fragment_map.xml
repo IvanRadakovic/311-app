@@ -42,6 +42,7 @@
                     android:background="@color/colorAccent"
                     android:textStyle="bold"
                     android:text="5:20 AM"
+                    android:visibility="invisible"
 
                     />
 

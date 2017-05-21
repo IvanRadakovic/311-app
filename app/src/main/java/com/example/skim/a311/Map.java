@@ -45,36 +45,32 @@ public class Map extends Fragment {
 	Marker marker;
 	Circle markerRadius;
 	TileOverlay heatMap;
+	boolean done = false;
 	
-	int[][][][] data;
+	int[][][] data;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		data = new int[4][7][50][50];
+		data = new int[8][50][50];
 		
-		InputStream ins = getResources().openRawResource(getResources().getIdentifier("output","raw", "com.example" +
+		InputStream ins = getResources().openRawResource(getResources().getIdentifier("output", "raw", "com.example" +
 				".skim.a311"));
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(ins, "UTF-8"));
-			
-			
-			
-			for(int i = 0; i < 4; i++) {
-				for(int j = 0; j < 7; j++) {
-					for(int k = 0; k < 50; k++) {
-						Scanner input = new Scanner(br.readLine());
-						for(int l = 0; l < 50; l++) {
-							data[i][j][k][l] = input.nextInt();
-						}
+			for(int j = 0; j < 8; j++) {
+				for(int k = 0; k < 50; k++) {
+					Scanner input = new Scanner(br.readLine());
+					for(int l = 0; l < 50; l++) {
+						data[j][k][l] = input.nextInt();
 					}
 				}
 			}
-		} catch (Exception e)
-		{
+			
+		} catch(Exception e) {
 			
 		}
 		View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-
+		
 		setHasOptionsMenu(true);
 		mMapView = (MapView) rootView.findViewById(R.id.mapView);
 		mMapView.onCreate(savedInstanceState);
@@ -135,7 +131,9 @@ public class Map extends Fragment {
 				googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 				
 				
-				addHeatMap(1);
+				addHeatMap(7);
+				
+				
 				
 				
 				googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -163,9 +161,8 @@ public class Map extends Fragment {
 						int[] probs = new int[7];
 						
 						for(int i = 0; i < 7; i++) {
-							probs[i] = data[1][i][ay][ax];
+							probs[i] = data[i][ay][ax];
 						}
-						
 						
 						
 					}
@@ -192,39 +189,42 @@ public class Map extends Fragment {
 	}
 	
 	
-	private void addHeatMap(int crime) {
-		
-		if(heatMap != null) {
-			heatMap.remove();
-		}
-		
-		
-		int total = 50;
-		
-		double x = 29.23;
-		double y = -95.87;
-		
-		
-		List<LatLng> list = new ArrayList<>();
-		list.add(new LatLng(29.741802, -95.359841));
-		
-		double size = 1.0 / total;
-		for(int i = 0; i < total; i++)
-			for(int j = 0; j < total; j++) {
-				int probability = data[1][crime][i][j] * 10;
-				for(int n = 0; n < probability; n++)
-					list.add(new LatLng(x + (i + Math.random() * 3 - 1) * size, y + (j + Math.random() * 3 - 1) * size));
+	private void addHeatMap(int frame) {
+		if(!done) {
+			done = true;
+			
+			if(heatMap != null) {
+				heatMap.remove();
 			}
-		
-		int[] colors = {Color.rgb(161, 239, 70), Color.rgb(255, 69, 55)};
-		
-		float[] startPoints = {0.2f, 1f};
-		
-		Gradient gradient = new Gradient(colors, startPoints);
-		
-		HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder().data(list).radius(35).gradient(gradient)
-				.opacity(0.65).build();
-		heatMap = googleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+			
+			
+			int total = 50;
+			
+			double x = 29.23;
+			double y = -95.87;
+			
+			
+			List<LatLng> list = new ArrayList<>();
+			list.add(new LatLng(29.741802, -95.359841));
+			
+			double size = 1.0 / total;
+			for(int i = 0; i < total; i++)
+				for(int j = 0; j < total; j++) {
+					int probability = data[frame][i][j] * 10;
+					for(int n = 0; n < probability; n++)
+						list.add(new LatLng(x + (i + Math.random() * 3 - 1) * size, y + (j + Math.random() * 3 - 1) * size));
+					
+				}
+			
+			int[] colors = {Color.rgb(161, 239, 70), Color.rgb(255, 69, 55)};
+			
+			float[] startPoints = {0.2f, 1f};
+			
+			Gradient gradient = new Gradient(colors, startPoints);
+			
+			HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder().data(list).radius(20).gradient(gradient).opacity(0.65).build();
+			heatMap = googleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+		}
 	}
 	
 	
@@ -266,14 +266,17 @@ public class Map extends Fragment {
 		// TODO: Update argument type and name
 		void onFragmentInteraction(Uri uri);
 	}
+	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Add your menu entries here
 		getActivity().getMenuInflater().inflate(R.menu.actionbutton, menu);
 		MenuItem item = menu.findItem(R.id.spinner);
 		Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
-		String[] array = {"Sexual Assault","Aggravated Assault","Robbery","Burglary","Auto Theft","Murder","Theft"};
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.your_selected_spinner_item, array);
+		String[] array = {"Theft", "Aggravated Assault", "Robbery", "Burglary", "Auto Theft", "Murder",
+				"Theft"};
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.your_selected_spinner_item,
+				array);
 		adapter.setDropDownViewResource(R.layout.your_dropdown_item);
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -281,10 +284,10 @@ public class Map extends Fragment {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				addHeatMap(position);
 			}
-
+			
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-
+				
 			}
 		});
 		super.onCreateOptionsMenu(menu, inflater);
