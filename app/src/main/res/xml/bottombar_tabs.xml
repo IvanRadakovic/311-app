@@ -8,10 +8,6 @@
         icon="@drawable/ic_library_books_black_24dp"
         title="Feed" />
     <tab
-        id="@+id/tab_report"
-        icon="@drawable/ic_mode_edit_black_24dp"
-        title="Report" />
-    <tab
         id="@+id/tab_references"
         icon="@drawable/ic_info_black_24dp"
         title="Contact" />

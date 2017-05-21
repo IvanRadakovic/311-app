@@ -204,6 +204,7 @@ public class Map extends Fragment {
 		
 		
 		List<LatLng> list = new ArrayList<>();
+		list.add(new LatLng(29.741802, -95.359841));
 		
 		double size = 1.0 / total;
 		for(int i = 0; i < total; i++)
