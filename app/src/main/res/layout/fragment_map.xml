@@ -35,11 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/maptime"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
-                    android:textSize="30dp"
-                    android:textColor="#fff"
-                    android:background="@color/colorAccent"
+                    android:textSize="25dp"
                     android:textStyle="bold"
                     android:text="5:20 AM"
 
@@ -52,14 +48,11 @@
         </RelativeLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:gravity="center|top"
-            android:id="@+id/text123"/>
-
-
-
-
+            android:text="The Awesome Sliding Up Panel"
+            android:textSize="16sp" />
 
 
 
