@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reference1">Dial 9-1-1 to report an emergency.</string>
+    <string name="reference2">Dial 7138843131 to request non-emergency police service for locations within the city limits of Houston.</string>
+    <string name="reference3">HPD\'s postal mail address:\nHouston Police Department\n1200 Travis Street\nHouston, TX 77002</string>
 </resources>
