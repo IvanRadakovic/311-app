@@ -12,14 +12,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 import com.google.maps.android.heatmaps.Gradient;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
 import com.google.maps.android.heatmaps.WeightedLatLng;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -109,6 +114,18 @@ public class Map extends Fragment {
 				
 			}
 		});
+		TextView maptime = (TextView)rootView.findViewById(R.id.maptime);
+		Calendar c = Calendar.getInstance();
+		maptime.setText(c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE));
+		final SlidingUpPanelLayout sp = (SlidingUpPanelLayout)rootView.findViewById(R.id.sliding_layout) ;
+		Button bt = (Button)rootView.findViewById(R.id.slidingtest);
+		bt.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				sp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+			}
+		});
+
 		
 		return rootView;
 	}

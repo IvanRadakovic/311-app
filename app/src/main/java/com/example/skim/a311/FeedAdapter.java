@@ -121,11 +121,6 @@ public class FeedAdapter extends BaseAdapter {
 
         }
 
-
-
-
-
-
         return rowView;
     }
 
