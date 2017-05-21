@@ -33,6 +33,7 @@ public class Feed extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private FeedAdapter adapter;
 
     public Feed() {
         // Required empty public constructor
@@ -70,10 +71,12 @@ public class Feed extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ArrayList<Crime> c = new ArrayList<Crime>();
-        c.add(new Crime("12 AM","July 25th","Here","MURDER"));
+        c.add(new Crime("12 AM","July 25th","Here","Murder"));
+        c.add(new Crime("5 PM","July 6th","Albert Street","Rape"));
+        adapter = new FeedAdapter(c, getContext());
         rootview = inflater.inflate(R.layout.fragment_feed, container, false);
         yourListView = (ListView) rootview.findViewById(R.id.listview);
-        yourListView.setAdapter(new FeedAdapter(rootview.getContext(), c));
+        yourListView.setAdapter(adapter);
 
         return rootview;
 
