@@ -117,7 +117,7 @@ public class FeedAdapter extends BaseAdapter {
 
         }
         else if(s.equals("Theft")){
-            holder.im.setImageResource(R.drawable.ic_money_bag;
+            holder.im.setImageResource(R.drawable.ic_money_bag);
 
         }
 
