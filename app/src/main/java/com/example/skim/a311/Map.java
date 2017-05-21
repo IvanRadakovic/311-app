@@ -2,18 +2,25 @@ package com.example.skim.a311;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.*;
+import com.google.maps.android.heatmaps.Gradient;
+import com.google.maps.android.heatmaps.HeatmapTileProvider;
+import com.google.maps.android.heatmaps.WeightedLatLng;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Map extends Fragment {
@@ -40,6 +47,20 @@ public class Map extends Fragment {
 			public void onMapReady(GoogleMap mMap) {
 				googleMap = mMap;
 				
+				try {
+					// Customise the styling of the base map using a JSON object defined
+					// in a raw resource file.
+					boolean success = googleMap.setMapStyle(
+							MapStyleOptions.loadRawResourceStyle(
+									getActivity(), R.raw.style_json));
+					
+					if (!success) {
+						Log.e("MapStyle", "Style parsing failed.");
+					}
+				} catch (Resources.NotFoundException e) {
+					Log.e("MapStyle", "Can't find style. Error: ", e);
+				}
+				
 				// For showing a move to my location button
 				if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
 						PackageManager.PERMISSION_GRANTED) {
@@ -59,10 +80,43 @@ public class Map extends Fragment {
 				CameraPosition cameraPosition = new CameraPosition.Builder().target(houston).zoom(9).build();
 				googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 				
+				
+				addHeatMap();
+				
 			}
 		});
 		
 		return rootView;
+	}
+	
+	
+	private void addHeatMap() {
+		int total = 50;
+		
+		double x = 29.23;
+		double y = -95.87;
+		
+		
+		List<LatLng> list = new ArrayList<>();
+		
+		double size = 1.0 / total;
+		for(int i = 0; i < total; i++)
+			for(int j = 0; j < total; j++) {
+				if(Math.random() < 0.6) {
+					int weight = (int) Math.floor(Math.random() * 50);
+					for(int n = 0; n < weight; n++)
+						list.add(new LatLng(x + (i + Math.random() * 3 - 1) * size, y + (j + Math.random() * 3 - 1) * size));
+				}
+			}
+		
+		int[] colors = {Color.rgb(161, 239, 70), Color.rgb(255, 69, 55)};
+		
+		float[] startPoints = {0.2f, 1f};
+		
+		Gradient gradient = new Gradient(colors, startPoints);
+			
+		HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder().data(list).radius(50).gradient(gradient).opacity(0.65).build();
+		googleMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
 	}
 	
 	
