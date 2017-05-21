@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements Map.OnFragmentInt
 
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("safeHOU");
 		setContentView(R.layout.activity_main);
 
 
