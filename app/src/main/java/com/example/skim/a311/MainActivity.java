@@ -64,13 +64,8 @@ public class MainActivity extends AppCompatActivity implements Map.OnFragmentInt
 					case R.id.tab_map:
 						fragmentClass = Map.class;
 						break;
-
-
 					case R.id.tab_crimefeed:
 						fragmentClass = Feed.class;
-						break;
-					case R.id.tab_report:
-						fragmentClass = Report.class;
 						break;
 					case R.id.tab_references:
 						fragmentClass = Contact.class;
