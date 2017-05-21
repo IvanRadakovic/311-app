@@ -8,12 +8,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
@@ -29,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Properties;
 
 
 public class Map extends Fragment {
@@ -66,7 +74,8 @@ public class Map extends Fragment {
 			
 		}
 		View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-		
+
+		setHasOptionsMenu(true);
 		mMapView = (MapView) rootView.findViewById(R.id.mapView);
 		mMapView.onCreate(savedInstanceState);
 		final SlidingUpPanelLayout sp = (SlidingUpPanelLayout) rootView.findViewById(R.id.sliding_layout);
@@ -255,5 +264,28 @@ public class Map extends Fragment {
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
 		void onFragmentInteraction(Uri uri);
+	}
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Add your menu entries here
+		getActivity().getMenuInflater().inflate(R.menu.actionbutton, menu);
+		MenuItem item = menu.findItem(R.id.spinner);
+		Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
+		String[] array = {"Sexual Assault","Aggravated Assault","Robbery","Burglary","Auto Theft","Murder","Theft"};
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), R.layout.your_selected_spinner_item, array);
+		adapter.setDropDownViewResource(R.layout.your_dropdown_item);
+		spinner.setAdapter(adapter);
+		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				addHeatMap(position);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+		super.onCreateOptionsMenu(menu, inflater);
 	}
 }

@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:gravity="bottom"
         sothree:umanoFadeColor="@android:color/transparent"
-        sothree:umanoPanelHeight="30dp"
+        sothree:umanoPanelHeight="20dp"
         sothree:umanoShadowHeight="4dp">
 
         <RelativeLayout

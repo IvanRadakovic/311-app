@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +16,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import java.lang.reflect.Array;
 
 public class MainActivity extends AppCompatActivity implements Map.OnFragmentInteractionListener, Feed.OnFragmentInteractionListener,Report.OnFragmentInteractionListener,Contact.OnFragmentInteractionListener {
 
@@ -92,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements Map.OnFragmentInt
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.action_settings:
 
                 /*
                 Intent in = new Intent(this,Settings.class);
@@ -105,8 +111,7 @@ public class MainActivity extends AppCompatActivity implements Map.OnFragmentInt
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.actionbutton, menu);
+
 		return true;
 	}
 }
