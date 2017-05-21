@@ -14,12 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 import com.google.maps.android.heatmaps.Gradient;
 import com.google.maps.android.heatmaps.HeatmapTileProvider;
-import com.google.maps.android.heatmaps.WeightedLatLng;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 
@@ -105,7 +103,8 @@ public class Map extends Fragment {
 						if(markerRadius != null)
 							markerRadius.remove();
 						
-						marker = googleMap.addMarker(new MarkerOptions().position(point));
+						marker = googleMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory
+								.fromResource(R.drawable.shield)));
 						
 						markerRadius = googleMap.addCircle(new CircleOptions().center(point).radius(750)
 								.fillColor(0x7003a9f3).strokeColor(0).zIndex(5));
