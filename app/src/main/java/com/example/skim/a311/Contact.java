@@ -31,6 +31,7 @@ public class Contact extends Fragment {
 
     private TextView reference2;
     private TextView reference3;
+    private TextView reference4;
     private LinearLayout linearLayout;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,8 +79,11 @@ public class Contact extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
         reference2 = (TextView) view.findViewById(R.id.reference2);
         reference3 = (TextView) view.findViewById(R.id.reference3);
+        reference4 = (TextView) view.findViewById(R.id.reference4);
+        Pattern pattern = Pattern.compile(".");
         Linkify.addLinks(reference2, Linkify.PHONE_NUMBERS);
         Linkify.addLinks(reference3, Linkify.MAP_ADDRESSES);
+        Linkify.addLinks(reference4, pattern, "http://www.houstontx.gov/police/contact/index.htm");
         // Inflate the layout for this fragment
         return view;
     }
