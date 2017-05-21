@@ -4,9 +4,15 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -23,6 +29,9 @@ public class Contact extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private TextView reference2;
+    private TextView reference3;
+    private LinearLayout linearLayout;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -54,6 +63,9 @@ public class Contact extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle("Contact");
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -63,8 +75,13 @@ public class Contact extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_contact, container, false);
+        reference2 = (TextView) view.findViewById(R.id.reference2);
+        reference3 = (TextView) view.findViewById(R.id.reference3);
+        Linkify.addLinks(reference2, Linkify.PHONE_NUMBERS);
+        Linkify.addLinks(reference3, Linkify.MAP_ADDRESSES);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,5 +121,24 @@ public class Contact extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    /**
+     * Add a link to the TextView which is given.
+     *
+     * @param textView       the field containing the text
+     * @param patternToMatch a regex pattern to put a link around
+     * @param link           the link to add
+     */
+    public static void addLink(TextView textView, String patternToMatch,
+                               final String link) {
+        Linkify.TransformFilter filter = new Linkify.TransformFilter() {
+            @Override
+            public String transformUrl(Matcher match, String url) {
+                return link;
+            }
+        };
+        Linkify.addLinks(textView, Pattern.compile(patternToMatch), null, null,
+                filter);
     }
 }
