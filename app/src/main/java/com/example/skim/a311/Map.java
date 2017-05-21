@@ -26,6 +26,8 @@ import java.util.List;
 public class Map extends Fragment {
 	MapView mMapView;
 	private GoogleMap googleMap;
+	Marker marker;
+	Circle markerRadius;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,19 +71,41 @@ public class Map extends Fragment {
 							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
 							1);
 					
+					while(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
+							PackageManager.PERMISSION_GRANTED) {
+						try {
+							Thread.sleep(20);
+						} catch(InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					
 				}
 				googleMap.setMyLocationEnabled(true);
 				
-				// For dropping a marker at a point on the Map
-				LatLng houston = new LatLng(29.7528067,-95.4009056);
-				//googleMap.addMarker(new MarkerOptions().position(houston).title("Marker Title").snippet("Desc"));
-				
-				// For zooming automatically to the location of the marker
-				CameraPosition cameraPosition = new CameraPosition.Builder().target(houston).zoom(9).build();
+				CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(29.7528067,-95.4009056)).zoom(9).build();
 				googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 				
 				
 				addHeatMap();
+				
+				
+				googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+					@Override
+					public void onMapClick(LatLng point) {
+						if(marker != null)
+							marker.remove();
+						
+						if(markerRadius != null)
+							markerRadius.remove();
+						
+						marker = googleMap.addMarker(new MarkerOptions().position(point));
+						
+						markerRadius = googleMap.addCircle(new CircleOptions().center(point).radius(750)
+								.fillColor(0x7003a9f3).strokeColor(0).zIndex(5));
+						
+					}
+				});
 				
 			}
 		});
