@@ -71,14 +71,14 @@ public class Feed extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ArrayList<Crime> c = new ArrayList<Crime>();
-        c.add(new Crime("12 AM","May 19th","Saxton Street","Theft"));
-        c.add(new Crime("5 PM","May 19th","Albert Street","Auto Theft"));
+        c.add(new Crime("10 AM","May 19th","Saxton Street","Theft"));
+        c.add(new Crime("12 PM","May 19th","Albert Street","Auto Theft"));
         c.add(new Crime("11 PM","May 19th","6th Street","Aggravated Assault"));
-        c.add(new Crime("10 AM","May 19th","Shirley Avenue","Robbery"));
-        c.add(new Crime("7 PM","May 20th","Amherst Road","Auto Theft"));
-        c.add(new Crime("2 AM","May 20th","Hickory Street","Burglary"));
-        c.add(new Crime("9 AM","May 20th","Birchwood Drive","Burglary"));
-        c.add(new Crime("4 AM","May 20th","West Hall Road","Aggravated Assault"));
+        c.add(new Crime("12 AM","May 19th","Shirley Avenue","Robbery"));
+        c.add(new Crime("7 AM","May 20th","Amherst Road","Auto Theft"));
+        c.add(new Crime("2 PM","May 20th","Hickory Street","Burglary"));
+        c.add(new Crime("9 PM","May 20th","Birchwood Drive","Burglary"));
+        c.add(new Crime("4 AM","May 21th","West Hall Road","Aggravated Assault"));
         adapter = new FeedAdapter(c, getContext());
         rootview = inflater.inflate(R.layout.fragment_feed, container, false);
         yourListView = (ListView) rootview.findViewById(R.id.listview);
