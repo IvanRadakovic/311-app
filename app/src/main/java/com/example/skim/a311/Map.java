@@ -40,7 +40,8 @@ public class Map extends Fragment {
 		
 		mMapView = (MapView) rootView.findViewById(R.id.mapView);
 		mMapView.onCreate(savedInstanceState);
-		
+		final SlidingUpPanelLayout sp = (SlidingUpPanelLayout)rootView.findViewById(R.id.sliding_layout) ;
+
 		mMapView.onResume(); // needed to get the map to display immediately
 		
 		try {
@@ -90,8 +91,8 @@ public class Map extends Fragment {
 				
 				CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(29.7528067,-95.4009056)).zoom(9).build();
 				googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-				
-				
+
+
 				addHeatMap();
 				
 				
@@ -108,6 +109,9 @@ public class Map extends Fragment {
 						
 						markerRadius = googleMap.addCircle(new CircleOptions().center(point).radius(750)
 								.fillColor(0x7003a9f3).strokeColor(0).zIndex(5));
+
+						sp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+
 						
 					}
 				});
@@ -117,12 +121,20 @@ public class Map extends Fragment {
 		TextView maptime = (TextView)rootView.findViewById(R.id.maptime);
 		Calendar c = Calendar.getInstance();
 		maptime.setText(c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE));
-		final SlidingUpPanelLayout sp = (SlidingUpPanelLayout)rootView.findViewById(R.id.sliding_layout) ;
 		Button bt = (Button)rootView.findViewById(R.id.slidingtest);
 		bt.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				sp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+
+			}
+		});
+
+		sp.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(!hasFocus){
+					sp.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+				}
 			}
 		});
 
