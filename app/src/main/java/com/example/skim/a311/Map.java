@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,6 +87,7 @@ public class Map extends Fragment {
 					
 				}
 				googleMap.setMyLocationEnabled(true);
+				googleMap.getUiSettings().setMapToolbarEnabled(false);
 				
 				CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(29.7528067,-95.4009056)).zoom(9).build();
 				googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -97,19 +99,29 @@ public class Map extends Fragment {
 				googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 					@Override
 					public void onMapClick(LatLng point) {
-						if(marker != null)
-							marker.remove();
-						
-						if(markerRadius != null)
-							markerRadius.remove();
-						
-						marker = googleMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory
-								.fromResource(R.drawable.shield)));
-						
-						markerRadius = googleMap.addCircle(new CircleOptions().center(point).radius(750)
-								.fillColor(0x7003a9f3).strokeColor(0).zIndex(5));
+						if(!sp.getPanelState().equals(SlidingUpPanelLayout.PanelState.EXPANDED)) {
+							if (marker != null)
+								marker.remove();
 
-						sp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+							if (markerRadius != null)
+								markerRadius.remove();
+
+							marker = googleMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory
+									.fromResource(R.drawable.shield)));
+
+							markerRadius = googleMap.addCircle(new CircleOptions().center(point).radius(750)
+									.fillColor(0x7003a9f3).strokeColor(0).zIndex(5));
+
+						}
+
+
+						if(!sp.getPanelState().equals(SlidingUpPanelLayout.PanelState.EXPANDED)){
+							sp.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+						}
+						else{
+							sp.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+						}
+
 
 						
 					}
