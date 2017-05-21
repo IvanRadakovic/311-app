@@ -11,7 +11,7 @@ public class Crime {
     String location;
     String crime;
 
-    public Crime(String t, String d, String l, String c){
+    public Crime(String t, String d, String l, String c) {
         time = t;
         date = d;
         location = l;
@@ -36,6 +36,6 @@ public class Crime {
 
     @Override
     public String toString() {
-        return time + " "+ date + " "+location+" "+crime;
+        return time + " " + date + " " + location + " " + crime;
     }
 }
