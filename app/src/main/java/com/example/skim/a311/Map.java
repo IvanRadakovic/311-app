@@ -57,8 +57,6 @@ public class Map extends Fragment {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(ins, "UTF-8"));
 			
-			
-			
 			for(int i = 0; i < 4; i++) {
 				for(int j = 0; j < 7; j++) {
 					for(int k = 0; k < 50; k++) {
@@ -74,7 +72,7 @@ public class Map extends Fragment {
 			
 		}
 		View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-
+		getActivity().setTitle("safeHOU");
 		setHasOptionsMenu(true);
 		mMapView = (MapView) rootView.findViewById(R.id.mapView);
 		mMapView.onCreate(savedInstanceState);

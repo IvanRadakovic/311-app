@@ -71,8 +71,15 @@ public class Feed extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ArrayList<Crime> c = new ArrayList<Crime>();
-        c.add(new Crime("12 AM","July 25th","Here","Murder"));
+        c.add(new Crime("12 AM","July 25th","Saxton Street","Murder"));
         c.add(new Crime("5 PM","July 6th","Albert Street","Rape"));
+        c.add(new Crime("11 PM","December 17th","6th Street","Aggravated Assault"));
+        c.add(new Crime("10 AM","January 31st","Shirley Avenue","Robbery"));
+        c.add(new Crime("7 PM","July 22nd","Amherst Road","Auto Theft"));
+        c.add(new Crime("2 AM","October 21st","Hickory Street","Burglary"));
+        c.add(new Crime("4 PM","April 2nd","Pheasant Street","Theft"));
+        c.add(new Crime("9 AM","September 9th","Birchwood Drive","Burglary"));
+        c.add(new Crime("4 AM","November 22nd","West Hall Road","Murder"));
         adapter = new FeedAdapter(c, getContext());
         rootview = inflater.inflate(R.layout.fragment_feed, container, false);
         yourListView = (ListView) rootview.findViewById(R.id.listview);

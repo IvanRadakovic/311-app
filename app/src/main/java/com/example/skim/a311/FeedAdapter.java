@@ -98,7 +98,7 @@ public class FeedAdapter extends ArrayAdapter<Crime> {
         } else if (s.equals("Robbery")) {
             holder.im.setImageResource(R.drawable.ic_robbery);
 
-        } else if (s.equals("Burglar")) {
+        } else if (s.equals("Burglary")) {
             holder.im.setImageResource(R.drawable.ic_home_black_24dp);
 
         } else if (s.equals("Auto Theft")) {

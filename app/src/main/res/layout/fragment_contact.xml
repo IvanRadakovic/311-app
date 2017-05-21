@@ -1,62 +1,119 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context="com.example.skim.a311.Contact">
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" />
+
+    <RelativeLayout
+        android:id="@+id/rel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/contact_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Mobile Contacts"
+            android:textColor="#0054a6"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/reference1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="45dp"
+            android:layout_below="@id/contact_sub"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="60dp"
             android:text="@string/reference1"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/reference2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/reference1"
-            android:layout_marginBottom="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/reference2"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_layout"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/addresses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="45dp"
-            android:text="@string/reference2"
-            android:textSize="20sp" />
+            android:layout_marginTop="20dp"
+            android:text="Addresses"
+            android:textColor="#0054a6"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/reference3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reference2"
-            android:layout_marginBottom="45dp"
+            android:layout_below="@id/addresses"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="45dp"
             android:text="@string/reference3"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_layout2"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/websites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Websites"
+            android:textColor="#0054a6"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/reference4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/reference3"
-            android:layout_marginBottom="70dp"
+            android:layout_below="@id/websites"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="45dp"
             android:text="Houston Police Department Contact Numbers"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
-</ScrollView>
+</LinearLayout>
