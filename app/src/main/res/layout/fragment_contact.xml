@@ -1,41 +1,62 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     tools:context="com.example.skim.a311.Contact">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/reference1"
-        android:textSize="15sp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/reference2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/reference2"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/reference1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="60dp"
+            android:text="@string/reference1"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/reference3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/reference3"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/reference2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reference1"
+            android:layout_marginBottom="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="45dp"
+            android:text="@string/reference2"
+            android:textSize="20sp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/reference3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reference2"
+            android:layout_marginBottom="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="45dp"
+            android:text="@string/reference3"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/reference4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reference3"
+            android:layout_marginBottom="70dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="45dp"
+            android:text="Houston Police Department Contact Numbers"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</ScrollView>
